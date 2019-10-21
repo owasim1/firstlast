@@ -2,18 +2,13 @@
   <v-app>
     <h3>Name Initials</h3>
     <v-list>
-      <v-list-item>
+      <v-list-item v-for="(initial, index) in initials" :key="index">
         <v-list-item-content>
-          <v-list-item-title>Single-line item</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Single-line item</v-list-item-title>
+          <v-list-item-title>{{ initial.toUpperCase() }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <NameFields/>
+    <NameFields :initials="initials" />
   </v-app>
 </template>
 
@@ -26,7 +21,7 @@ export default {
     NameFields,
   },
   data: () => ({
-    //
+    initials: []
   }),
 };
 </script>
