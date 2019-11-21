@@ -5,8 +5,7 @@
         <v-btn v-on="on">Add Initials</v-btn>
       </template>
       <v-sheet class="text-center" height="250px">
-        <v-btn class="mt-6" color="red" @click="sheet = !sheet"
-        >close</v-btn>
+        <v-btn class="mt-6" color="red" @click="sheet = !sheet">close</v-btn>
         <div>
           <v-container class="text-fields" >
             <v-row>
@@ -23,46 +22,48 @@
               </v-col>
             </v-row>
           </v-container>
-          <v-dialog class="error" v-model="dialog" width="500">
-            <v-card>
-              <v-card-title class="headline grey lighten-2" secondary-title>
-                Error
-              </v-card-title>
-              <v-card-text>
-                Please fill in all the fields.
-              </v-card-text>
-            </v-card>
-          </v-dialog>
         </div>
       </v-sheet>
     </v-bottom-sheet>
+    <v-dialog class="error" v-model="dialog" width="500">
+      <v-card>
+        <v-card-title class="headline grey lighten-2" secondary-title>
+          Error
+        </v-card-title>
+        <v-card-text>
+          Please fill in all the fields.
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 export default {
   name: 'NameFields',
-  props: ["initials"],
+  props: ["initials", "index",],
   data: () => ({
-      isValid: false,
+      nameFieldsNotEmpty: false,
       sheet: false,
       firstNameField:"",
       lastNameField:"",
       dialog: false,
+      number: 0,
     }),
   methods: {
-    addInitials: function() {
+    addInitials () {
       if(this.firstNameField =="" || this.lastNameField==""){
         this.dialog = true
       }
       if(this.firstNameField!="" && this.lastNameField!=""){
-        this.isValid=true
+        this.nameFieldsNotEmpty=true
       }
-      if(this.isValid) {
+      if(this.nameFieldsNotEmpty) {
         this.initials.push(this.firstNameField[0]+this.lastNameField[0]);
-        this.isValid=false
+        this.nameFieldsNotEmpty=false
+      this.number = this.initials.length
+      this.$emit('nameFieldsToApp', this.number)
       }
-
     },
   },
 }
