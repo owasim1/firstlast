@@ -1,15 +1,18 @@
 <template>
   <div class="text-center">
-    <v-dialog persistent v-model="this.is_shown" width="500">
+    <v-dialog persistent scrollable v-model="this.is_shown" width="500">
       <v-card>
-        <v-card-title primary-title>
+        <v-card-title height="10px" primary-title>
           Initials
         </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text style = "height: 300px;">
           <div class="margin" v-for="(initial, index) in initials" :key="index">
             <v-avatar class="white--text" v-if="index >= 4" color="primary">
               {{ initial.toUpperCase() }}
             </v-avatar>
           </div>
+        </v-card-text>
           <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
